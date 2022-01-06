@@ -1,5 +1,5 @@
-import React from "react";
+import React, { memo } from "react";
 
-export default function App() {
-  return <div>App</div>;
-}
+export default memo(function App() {
+  return <div>app</div>;
+});
