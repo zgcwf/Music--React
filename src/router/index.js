@@ -1,11 +1,14 @@
 import Discover from "@/pages/Discover";
 import Friends from "@/pages/Friends";
 import Mine from "@/pages/Mine";
+import { Redirect } from "react-router-dom";
 const routes = [
   {
     path: "/",
     exact: true,
-    component: Discover,
+    render: () => {
+      return <Redirect to="/discover" />;
+    },
   },
   {
     path: "/discover",

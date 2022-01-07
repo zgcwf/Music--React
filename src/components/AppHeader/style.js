@@ -35,10 +35,10 @@ export const HeaderLeft = styled.div`
         color: #ccc;
         text-decoration: none;
       }
-      /* 给最后一个select-item 的a元素添加伪类 */
-      :last-of-type a {
+      /* 给最后一个select-item 的a元素添加伪类--HOT */
+      &:last-of-type a {
         position: relative;
-        ::after {
+        &::after {
           position: absolute;
           content: "";
           width: 28px;
@@ -55,7 +55,7 @@ export const HeaderLeft = styled.div`
         color: #fff;
         background: #000;
       }
-      /* 给NavLink选中项的后代元素类名icon添加样式 */
+      /* 给NavLink选中项的后代元素类名icon添加样式--选中三角 */
       .active .icon {
         position: absolute;
         display: inline-block;
@@ -82,9 +82,7 @@ export const HeaderRight = styled.div`
     height: 32px;
     border-radius: 16px;
     input {
-      &::placeholder {
-        font-size: 12px;
-      }
+      font-size: 12px;
     }
   }
 
