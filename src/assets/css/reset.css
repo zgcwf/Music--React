@@ -62,7 +62,7 @@ body, textarea, select, input, button {
 }
 
 .wrap-v2 {
-  max-width: 980px;
+  width: 980px;
   margin: 0 auto;
 }
 
