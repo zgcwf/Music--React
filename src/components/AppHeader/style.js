@@ -31,15 +31,16 @@ export const HeaderLeft = styled.div`
   .select-list {
     display: flex;
     line-height: 70px;
-    
+
     .select-item {
       position: relative;
       a {
         display: block;
         padding: 0 20px;
         color: #ccc;
+        text-decoration: none;
       }
-
+      /* 给最后一个select-item 的a元素添加伪类 */
       :last-of-type a {
         position: relative;
         ::after {
@@ -53,13 +54,13 @@ export const HeaderLeft = styled.div`
           right: -15px;
         }
       }
-
-      &:hover a, a.active {
+      /* select-item类以及NavLink选中项添加hover */
+      &:hover,
+      .active {
         color: #fff;
         background: #000;
-        text-decoration: none;
       }
-      
+      /* 给NavLink选中项的后代元素类名icon添加样式 */
       .active .icon {
         position: absolute;
         display: inline-block;
@@ -72,7 +73,7 @@ export const HeaderLeft = styled.div`
       }
     }
   }
-`
+`;
 
 export const HeaderRight = styled.div`
   display: flex;
@@ -80,12 +81,10 @@ export const HeaderRight = styled.div`
   color: #ccc;
   font-size: 12px;
 
-
   .search {
     width: 158px;
     height: 32px;
     border-radius: 16px;
-
     input {
       &::placeholder {
         font-size: 12px;
@@ -96,11 +95,16 @@ export const HeaderRight = styled.div`
   .center {
     width: 90px;
     height: 32px;
-    line-height: 32px;
-    text-align: center;
-    border: 1px solid #666;
+    box-sizing: border-box;
+    border: 1px solid #4f4f4f;
+    color: #ccc;
     border-radius: 16px;
+    text-align: center;
     margin: 0 16px;
-    background-color: transparent;
+    background-color: #242424;
+    font-size: 12px;
+    &:hover {
+      border: 1px solid #fff;
+    }
   }
-`
+`;
