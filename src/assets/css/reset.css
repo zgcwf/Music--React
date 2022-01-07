@@ -58,10 +58,11 @@ body, textarea, select, input, button {
 .wrap-v1 {
   width: 1100px;
   margin: 0 auto;
+
 }
 
 .wrap-v2 {
-  width: 980px;
+  max-width: 980px;
   margin: 0 auto;
 }
 
@@ -120,3 +121,17 @@ body, textarea, select, input, button {
   color: #fff;
 }
 
+@media screen and (max-width: 1100px) {
+  .divider {
+    width: 1100px;
+    height: 5px;
+    background-color: #c20c0c;
+  }
+}
+@media screen and (min-width: 1100px) {
+  .divider {
+    width: 100vw;
+    height: 5px;
+    background-color: #c20c0c;
+  }
+}

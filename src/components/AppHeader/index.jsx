@@ -4,7 +4,6 @@ import { Input, Button } from "antd";
 import { SearchOutlined, UserOutlined } from "@ant-design/icons";
 
 import { HeaderWrapper, HeaderLeft, HeaderRight } from "./style";
-
 import { headerLinks } from "@/common/local-data";
 
 export default memo(function AppHeader() {
@@ -24,7 +23,7 @@ export default memo(function AppHeader() {
 
   return (
     <HeaderWrapper>
-      <div className="content wrap-v1">
+      <div className="content  wrap-v1">
         <HeaderLeft>
           <a href="#/" className="logo sprite_01">
             网易云音乐
