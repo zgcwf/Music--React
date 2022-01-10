@@ -127,11 +127,21 @@ body, textarea, select, input, button {
     height: 5px;
     background-color: #c20c0c;
   }
+  .top {
+    width: 1100px;
+    height: 30px;
+    background-color: #c20c0c;
+  }
 }
 @media screen and (min-width: 1100px) {
   .divider {
     width: 100vw;
     height: 5px;
+    background-color: #c20c0c;
+  }
+  .top {
+    width: 100vw;
+    height: 30px;
     background-color: #c20c0c;
   }
 }

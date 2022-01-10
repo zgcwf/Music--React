@@ -9,7 +9,7 @@ export default memo(function AppFooter() {
       <div className="content wrap-v2">
         <FooterLeft>
           <div className="link">
-            {footerLinks.map((item, index) => {
+            {footerLinks.map((item) => {
               return (
                 <Fragment key={item.title}>
                   <a href={item.link} target="_blank" rel="noopener noreferrer">
