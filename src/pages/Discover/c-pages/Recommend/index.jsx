@@ -1,5 +1,5 @@
 import React, { memo, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector, shallowEqual } from "react-redux";
 
 import { getTopBannerAction } from "./store/actionCreators";
 
@@ -10,15 +10,18 @@ function Recommend(props) {
   const dispatch = useDispatch();
 
   // 从redux的store对象中提取数据(state)。
-  const banners = useSelector((state) => ({
-    topBanners: state.recommend.topBanners,
-  }));
+  const { topBanners } = useSelector(
+    (state) => ({
+      topBanners: state.recommend.topBanners,
+    }),
+    shallowEqual
+  );
   // console.log(banners);
   useEffect(() => {
     dispatch(getTopBannerAction());
   }, [dispatch]);
 
-  return <div>Recommend:{banners.topBanners.length}</div>;
+  return <div>Recommend:{topBanners.length}</div>;
 }
 
 export default memo(Recommend);
