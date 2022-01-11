@@ -3,7 +3,7 @@ import { useDispatch, useSelector, shallowEqual } from "react-redux";
 
 import { getTopBannerAction } from "./store/actionCreators";
 
-function Recommend(props) {
+function Recommend() {
   // 使用hooks代替传统redux，获取数据和进行操作
 
   // 返回Redux store中对dispatch函数的引用。你可以根据需要使用它
@@ -12,7 +12,9 @@ function Recommend(props) {
   // 从redux的store对象中提取数据(state)。
   const { topBanners } = useSelector(
     (state) => ({
-      topBanners: state.recommend.topBanners,
+      // topBanners: state.recommend.topBanners,//普通读取数据方法
+      // topBanners: state.get("recommend").get("topBanners"), //ImmutableJS读取数据方法
+      topBanners: state.getIn(["recommend", "topBanners"]), //简写
     }),
     shallowEqual
   );
