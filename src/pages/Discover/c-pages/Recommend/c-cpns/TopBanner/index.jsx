@@ -30,15 +30,19 @@ function TopBanner() {
   }, [dispatch]);
 
   // 其他业务逻辑
+  //前进
   const previous = () => {
     bannerRef.current.prev();
   };
+  // 后退
   const next = () => {
     bannerRef.current.next();
   };
+  // 存储当前是第几项轮播图
   const bannerChange = (from, to) => {
     setCurrent(to);
   };
+  // 毛玻璃背景图，传递给props
   const bgImage =
     topBanners[current] &&
     topBanners[current].imageUrl + "?imageView&blur=40x20";
