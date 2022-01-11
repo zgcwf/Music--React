@@ -6,7 +6,7 @@ import { FooterWrapper, FooterLeft, FooterRight } from "./style";
 export default memo(function AppFooter() {
   return (
     <FooterWrapper>
-      <div className="content wrap-v2">
+      <div className="content">
         <FooterLeft>
           <div className="link">
             {footerLinks.map((item) => {
