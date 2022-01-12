@@ -2,7 +2,7 @@ import React, { memo, useEffect } from "react";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 
 import { getHotRecommendAction } from "../../store/actionCreators";
-import { HOT_RECOMMEND_LIMIT } from "@/common/contants";
+import { HOT_RECOMMEND_LIMIT } from "@/common/constants";
 import { HotRecommendWrapper } from "./style";
 
 import ThemeHeaderRec from "@/components/ThemeHeaderRec";

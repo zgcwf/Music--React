@@ -17,3 +17,11 @@ export function getHotRecommends(limit) {
     },
   });
 }
+
+// 请求新碟上架数据（get请求参数两种写法）
+export function getNewAlbum(limit) {
+  return request({
+    method: "get",
+    url: `/top/album?limit=${limit}`,
+  })
+}

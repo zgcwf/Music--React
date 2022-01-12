@@ -1,6 +1,5 @@
 import * as actionTypes from "./constants";
-import { getTopBanners } from "@/service/recommend";
-import { getHotRecommends } from "@/service/recommend";
+import { getTopBanners, getHotRecommends, getNewAlbum } from "@/service/recommend";
 
 // 异步请求轮播图数据
 export const changeTopBannerAction = (res) => ({
@@ -23,5 +22,17 @@ export const getHotRecommendAction = (limit) => {
   return async (dispatch) => {
     const res = await getHotRecommends(limit);
     dispatch(changeHotRecommendAction(res));
+  };
+};
+
+// 异步请求新碟上架数据
+export const changeNewAlbumAction = (res) => ({
+  type: actionTypes.CHANGE_NEW_ALBUM,
+  newAlbums: res.albums,
+});
+export const getNewAlbumAction = (limit) => {
+  return async (dispatch) => {
+    const res = await getNewAlbum(limit);
+    dispatch(changeNewAlbumAction(res));
   };
 };
