@@ -70,7 +70,9 @@ function TopBanner() {
             })}
           </Carousel>
         </BannerLeft>
-        <BannerRight></BannerRight>
+        <BannerRight>
+          <p>PC 安卓 iPhone WP iPad Mac 六大客户端</p>
+        </BannerRight>
         <BannerControl>
           <button className="btn left" onClick={previous}></button>
           <button className="btn right" onClick={next}></button>

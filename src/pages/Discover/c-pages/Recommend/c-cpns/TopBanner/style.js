@@ -4,7 +4,7 @@ export const BannerWrapper = styled.div`
   background: url(${(props) => props.bgImage}) no-repeat center center/6000px;
   /*background-position 和 background-size 属性, 之间需使用/分隔, 且position值在前, size值在后。*/
   .banner {
-    height: 270px;
+    height: 283px;
     background-color: red;
     display: flex;
     position: relative;
@@ -16,12 +16,13 @@ export const BannerLeft = styled.div`
 
   .banner-item {
     overflow: hidden;
-    height: 270px;
+    height: 283px;
     .image {
       width: 100%;
+      height: 283px;
     }
   }
-
+  /* 重写其样式 */
   .slick-dots li button {
     width: 6px !important ;
     height: 6px !important;
@@ -40,8 +41,15 @@ export const BannerRight = styled.a.attrs({
   target: "_blank",
 })`
   width: 254px;
-  height: 270px;
+  height: 283px;
   background: url(${require("@/assets/img/download.png")});
+  position: relative;
+  p {
+    position: absolute;
+    bottom: 10px;
+    left: 12px;
+    color: #8d8d8d;
+  }
 `;
 
 export const BannerControl = styled.div`
