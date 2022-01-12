@@ -7,3 +7,13 @@ export function getTopBanners() {
     url: "banner",
   });
 }
+// 请求热门推荐数据
+export function getHotRecommends(limit) {
+  return request({
+    method: "get",
+    url: "/personalized",
+    params: {
+      limit: limit,
+    },
+  });
+}
