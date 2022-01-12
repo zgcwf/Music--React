@@ -6,7 +6,7 @@ import { HOT_RECOMMEND_LIMIT } from "@/common/contants";
 import { HotRecommendWrapper } from "./style";
 
 import ThemeHeaderRec from "@/components/ThemeHeaderRec";
-
+import SongsCover from "@/components/SongsCover";
 export default memo(function HotRecommend() {
   // redux hooks
   const dispatch = useDispatch();
@@ -28,7 +28,7 @@ export default memo(function HotRecommend() {
       />
       <div className="recommend-list">
         {hotRecommends.map((item) => {
-          return <div key={item.id}>{item.name}</div>;
+          return <SongsCover key={item.id} info={item} />;
         })}
       </div>
     </HotRecommendWrapper>
