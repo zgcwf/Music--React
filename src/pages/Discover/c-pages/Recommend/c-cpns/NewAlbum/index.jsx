@@ -47,7 +47,7 @@ export default memo(function NewAlbum() {
             {[0, 1].map((item) => {
               return (
                 <div key={item} className="page">
-                  {newAlbums.slice(item * 5, (item + 1) * 5).map((thing) => {
+                  {newAlbums?.slice(item * 5, (item + 1) * 5).map((thing) => {
                     return (
                       <AlbumCover
                         key={thing.id}

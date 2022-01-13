@@ -109,9 +109,9 @@ const changeSettleSingsAction = (res) => ({
   type: actionTypes.CHANGE_SETTLE_SONGER,
   settleSings: res.artists,
 });
-export const getSettleSingers = (limit) => {
+export const getSettleSingers = (limit, cat) => {
   return (dispatch) => {
-    getArtistList(limit).then((res) => {
+    getArtistList(limit, cat).then((res) => {
       dispatch(changeSettleSingsAction(res));
     });
   };

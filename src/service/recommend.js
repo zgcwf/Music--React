@@ -41,11 +41,12 @@ export function getTopList(idx) {
 }
 
 // 请求入住歌手数据
-export function getArtistList(limit) {
+export function getArtistList(limit, cat) {
   return request({
     url: "/artist/list",
     params: {
       limit,
+      cat,
     },
   });
 }

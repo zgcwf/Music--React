@@ -28,27 +28,23 @@ export default memo(function TopRanking(props) {
         </div>
       </div>
       <div className="list">
-        {tracks &&
-          tracks.slice(0, 10).map((item, index) => {
-            return (
-              <div key={item.id} className="list-item">
-                <div className="rank">{index + 1}</div>
-                <div className="info">
-                  <NavLink
-                    to={`song?id=${item.id}`}
-                    className="name text-nowrap"
-                  >
-                    {item.name}
-                  </NavLink>
-                  <div className="operate">
-                    <button className="btn sprite_02 play"></button>
-                    <button className="btn sprite_icon2 addto"></button>
-                    <button className="btn sprite_02 favor"></button>
-                  </div>
+        {tracks?.slice(0, 10).map((item, index) => {
+          return (
+            <div key={item.id} className="list-item">
+              <div className="rank">{index + 1}</div>
+              <div className="info">
+                <NavLink to={`song?id=${item.id}`} className="name text-nowrap">
+                  {item.name}
+                </NavLink>
+                <div className="operate">
+                  <button className="btn sprite_02 play"></button>
+                  <button className="btn sprite_icon2 addto"></button>
+                  <button className="btn sprite_02 favor"></button>
                 </div>
               </div>
-            );
-          })}
+            </div>
+          );
+        })}
       </div>
       <div className="footer">
         <NavLink to={`/discover/toplist?id=${info.id}`}>查看全部</NavLink>
