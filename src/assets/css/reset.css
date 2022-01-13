@@ -99,12 +99,6 @@ body, textarea, select, input, button {
 }
 
 .image_cover {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  text-indent: -9999px;
   background: url(../img/sprite_cover.png) no-repeat -145px -57px;
 }
 
