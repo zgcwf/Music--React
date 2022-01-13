@@ -1,3 +1,4 @@
+// 底部组件
 import React, { memo, Fragment } from "react";
 
 import { footerLinks, footerImages } from "@/common/local-data";

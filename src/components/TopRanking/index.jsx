@@ -1,3 +1,4 @@
+// 封装榜单排行组件
 import React, { memo } from "react";
 import { NavLink } from "react-router-dom";
 
@@ -5,7 +6,7 @@ import { TopRankingWrapper } from "./style";
 import { getSizeImage } from "@/utils/Rec-format";
 
 export default memo(function TopRanking(props) {
-  const { info } = props;
+  const { info = [] } = props;
   const { tracks = [] } = info;
   return (
     <TopRankingWrapper>

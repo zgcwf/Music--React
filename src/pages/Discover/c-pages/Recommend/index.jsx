@@ -7,6 +7,9 @@ import TopBanner from "./c-cpns/TopBanner";
 import HotRecommend from "./c-cpns/HotRecommend";
 import NewAlbum from "./c-cpns/NewAlbum";
 import RecommendRanking from "./c-cpns/RecommendRanking";
+import UserLogin from "./c-cpns/UserLogin";
+import SettleSinger from "./c-cpns/SettleSinger";
+import HotAnchor from "./c-cpns/HotAnchor";
 function Recommend() {
   return (
     <div>
@@ -17,7 +20,11 @@ function Recommend() {
           <NewAlbum />
           <RecommendRanking />
         </RecommendLeft>
-        <RecommendRight></RecommendRight>
+        <RecommendRight>
+          <UserLogin />
+          <SettleSinger />
+          <HotAnchor />
+        </RecommendRight>
       </Content>
     </div>
   );
