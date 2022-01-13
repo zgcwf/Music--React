@@ -6,6 +6,7 @@ import {
   getHotRecommends,
   getNewAlbum,
   getTopList,
+  getArtistList,
 } from "@/service/recommend";
 
 // 异步请求轮播图数据
@@ -44,7 +45,7 @@ export const getNewAlbumAction = (limit) => {
   };
 };
 
-// 异步榜单上架数据
+// 异步请求榜单数据
 // 飙升榜
 const changeUpRankingAction = (res) => ({
   type: actionTypes.CHANGE_UP_RANKING,
@@ -100,5 +101,18 @@ export const getTopListAction = (idx) => {
     //       });
     //   }
     // });
+  };
+};
+
+// 异步请求入驻歌手数据--then链式调用
+const changeSettleSingsAction = (res) => ({
+  type: actionTypes.CHANGE_SETTLE_SONGER,
+  settleSings: res.artists,
+});
+export const getSettleSingers = (limit) => {
+  return (dispatch) => {
+    getArtistList(limit).then((res) => {
+      dispatch(changeSettleSingsAction(res));
+    });
   };
 };
