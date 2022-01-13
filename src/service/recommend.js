@@ -29,3 +29,12 @@ export function getNewAlbum(limit) {
     },
   });
 }
+//  请求榜单数据
+export function getTopList(idx) {
+  return request({
+    url: "/top/list",
+    params: {
+      idx,
+    },
+  });
+}

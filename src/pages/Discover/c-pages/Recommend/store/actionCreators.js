@@ -1,5 +1,12 @@
+import { notification } from "antd";
+
 import * as actionTypes from "./constants";
-import { getTopBanners, getHotRecommends, getNewAlbum } from "@/service/recommend";
+import {
+  getTopBanners,
+  getHotRecommends,
+  getNewAlbum,
+  getTopList,
+} from "@/service/recommend";
 
 // 异步请求轮播图数据
 export const changeTopBannerAction = (res) => ({
@@ -34,5 +41,64 @@ export const getNewAlbumAction = (limit) => {
   return async (dispatch) => {
     const res = await getNewAlbum(limit);
     dispatch(changeNewAlbumAction(res));
+  };
+};
+
+// 异步榜单上架数据
+// 飙升榜
+const changeUpRankingAction = (res) => ({
+  type: actionTypes.CHANGE_UP_RANKING,
+  upRanking: res.playlist,
+});
+// 新歌榜
+const changeNewRankingAction = (res) => ({
+  type: actionTypes.CHANGE_NEW_RANKING,
+  newRanking: res.playlist,
+});
+// 原创榜
+const changeOriginRankingAction = (res) => ({
+  type: actionTypes.CHANGE_ORIGIN_RANKING,
+  originRanking: res.playlist,
+});
+
+export const getTopListAction = (idx) => {
+  return async (dispatch) => {
+    const res = await getTopList(idx);
+    switch (idx) {
+      case 0:
+        dispatch(changeUpRankingAction(res));
+        break;
+      case 2:
+        dispatch(changeNewRankingAction(res));
+        break;
+      case 3:
+        dispatch(changeOriginRankingAction(res));
+        break;
+      default:
+        notification.error({
+          message: `参数异常`,
+          description: `Recommend/store/actionCreators内getTopListAction函数参数异常，
+            应得到值为0,1,2`,
+        });
+    }
+    // getTopList(idx).then((res) => {
+    //   switch (idx) {
+    //     case 0:
+    //       dispatch(changeUpRankingAction(res));
+    //       break;
+    //     case 2:
+    //       dispatch(changeNewRankingAction(res));
+    //       break;
+    //     case 3:
+    //       dispatch(changeOriginRankingAction(res));
+    //       break;
+    //     default:
+    //       notification.error({
+    //         message: `参数异常`,
+    //         description: `Recommend/store/actionCreators内getTopListAction函数参数异常，
+    //         应得到值为0,1,2`,
+    //       });
+    //   }
+    // });
   };
 };

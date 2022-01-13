@@ -62,7 +62,6 @@ export default memo(function NewAlbum() {
               );
             })}
           </Carousel>
-          ,
         </div>
         <button className="arrow sprite_02 arrow-right" onClick={next}></button>
       </div>
