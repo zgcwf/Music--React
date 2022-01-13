@@ -7,7 +7,7 @@ export function getTopBanners() {
     url: "banner",
   });
 }
-// 请求热门推荐数据
+// 请求热门推荐数据，参数limit为限制取几条数据
 export function getHotRecommends(limit) {
   return request({
     method: "get",
@@ -29,7 +29,7 @@ export function getNewAlbum(limit) {
     },
   });
 }
-//  请求榜单数据
+//  请求榜单数据,参数idx判断到底是哪个榜单 0-新歌榜,2-原创榜,3-飙升榜
 export function getTopList(idx) {
   return request({
     url: "/top/list",
