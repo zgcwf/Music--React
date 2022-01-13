@@ -41,4 +41,4 @@ export const AlbumWrapper = styled.div`
       }
     }
   }
-`
+`;
