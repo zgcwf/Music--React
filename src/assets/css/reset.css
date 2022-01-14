@@ -47,6 +47,10 @@ body, textarea, select, input, button {
   font-family: Arial, Helvetica, sans-serif;
   background-color: #f5f5f5;
 }
+/* html {
+  overflow-y: auto;
+  overflow-x: hidden
+} */
 
 /* 省略 */
 .text-nowrap {
@@ -134,13 +138,14 @@ body, textarea, select, input, button {
 }
 @media screen and (min-width: 1100px) {
   .divider {
-    width: 100vw;
     height: 5px;
     background-color: #c20c0c;
+    overflow: hidden;
   }
   .top {
-    width: 100vw;
     height: 30px;
     background-color: #c20c0c;
+    overflow: hidden;
+
   }
 }

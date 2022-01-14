@@ -11,5 +11,5 @@ export function getCount(count) {
 }
 // 给图片地址拼接上尺寸，从服务器获取合适尺寸图片，进行性能优化
 export function getSizeImage(imgUrl, size) {
-  return `${imgUrl}?param=${size}x${size}`;
+  return `${imgUrl}?param=${size}y${size}`;
 }

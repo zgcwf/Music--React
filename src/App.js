@@ -10,6 +10,7 @@ import store from "./store/index";
 // 导入组件
 import AppFooter from "@/components/AppFooter";
 import AppHeader from "@/components/AppHeader";
+import AppPlayBar from "./pages/Player/AppPlayBar";
 
 export default memo(function App() {
   return (
@@ -18,6 +19,7 @@ export default memo(function App() {
         <AppHeader />
         {renderRoutes(routes)}
         <AppFooter />
+        <AppPlayBar />
       </Provider>
     </div>
   );
