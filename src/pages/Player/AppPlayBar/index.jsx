@@ -1,10 +1,18 @@
-import React, { memo } from "react";
+import React, { memo, useEffect } from "react";
 import { Slider } from "antd";
 import { NavLink } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 import { PlaybarWrapper, Control, PlayInfo, Operator } from "./style";
+import { getSongDetailAction } from "../store/actionCreators.js";
 
 export default memo(function AppPlayBar() {
+  // redux hooks
+  const dispatch = useDispatch();
+  // other hooks
+  useEffect(() => {
+    dispatch(getSongDetailAction(1909955412));
+  }, [dispatch]);
   return (
     <PlaybarWrapper className="sprite_player">
       <div className="content wrap-v2">

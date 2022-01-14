@@ -1,3 +1,4 @@
+// 推荐模块请求API
 import request from "./request";
 
 // 请求轮播图数据
