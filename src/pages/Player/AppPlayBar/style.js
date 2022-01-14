@@ -34,6 +34,10 @@ export const Control = styled.div`
 
   .prev {
     background-position: 0 -130px;
+    &:hover {
+      background-position: -30px -130px;
+      cursor: pointer;
+    }
   }
 
   .play {
@@ -41,10 +45,20 @@ export const Control = styled.div`
     height: 36px;
     margin: 0 8px;
     background-position: 0 ${(props) => (props.isPlaying ? "-165px" : "-204px")};
+
+    &:hover {
+      background-position: -40px
+        ${(props) => (props.isPlaying ? "-165px" : "-204px")};
+      cursor: pointer;
+    }
   }
 
   .next {
     background-position: -80px -130px;
+    &:hover {
+      background-position: -110px -130px;
+      cursor: pointer;
+    }
   }
 `;
 
@@ -69,7 +83,10 @@ export const PlayInfo = styled.div`
       position: relative;
       top: 8px;
       left: 8px;
-
+      .song-name {
+        color: #e8e8e8;
+        margin-left: 10px;
+      }
       .singer-name {
         color: #a1a1a1;
         margin-left: 10px;
@@ -127,10 +144,18 @@ export const Operator = styled.div`
 
   .favor {
     background-position: -88px -163px;
+    &:hover {
+      background-position: -88px -189px;
+      cursor: pointer;
+    }
   }
 
   .share {
     background-position: -114px -163px;
+    &:hover {
+      background-position: -114px -189px;
+      cursor: pointer;
+    }
   }
 
   .right {
@@ -142,6 +167,10 @@ export const Operator = styled.div`
 
     .volume {
       background-position: -2px -248px;
+      &:hover {
+        background-position: -31px -248px;
+        cursor: pointer;
+      }
     }
 
     .loop {
@@ -155,6 +184,9 @@ export const Operator = styled.div`
             return "-3px -344px";
         }
       }};
+      &:hover {
+        cursor: pointer;
+      }
     }
 
     .playlist {
@@ -163,6 +195,10 @@ export const Operator = styled.div`
       color: #ccc;
       width: 59px;
       background-position: -42px -68px;
+      &:hover {
+        background-position: -42px -98px;
+        cursor: pointer;
+      }
     }
   }
 `;

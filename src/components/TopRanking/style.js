@@ -41,10 +41,18 @@ export const TopRankingWrapper = styled.div`
 
       .play {
         background-position: -267px -205px;
+        &:hover {
+          background-position: -267px -235px;
+          cursor: pointer;
+        }
       }
 
       .favor {
         background-position: -300px -205px;
+        &:hover {
+          background-position: -300px -235px;
+          cursor: pointer;
+        }
       }
     }
   }
@@ -96,16 +104,25 @@ export const TopRankingWrapper = styled.div`
 
           .play {
             background-position: -267px -268px;
+            &:hover {
+              background-position: -267px -288px;
+            }
           }
 
           .addto {
             position: relative;
             top: 2px;
             background-position: 0 -700px;
+            &:hover {
+              background-position: -22px -700px;
+            }
           }
 
           .favor {
             background-position: -297px -268px;
+            &:hover {
+              background-position: -297px -288px;
+            }
           }
         }
       }

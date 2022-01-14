@@ -45,6 +45,10 @@ export const SongsCoverWrapper = styled.div`
           width: 16px;
           height: 17px;
           background-position: 0 0;
+          &:hover {
+            background-position: 0 -60px;
+            cursor: pointer;
+          }
         }
       }
     }
