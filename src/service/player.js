@@ -1,7 +1,7 @@
 // 播放请求API
 import request from "./request";
 
-//播放歌曲详情
+//播放歌曲详情获取
 export function getSongDetail(ids) {
   return request({
     url: "/song/detail",
