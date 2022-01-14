@@ -23,21 +23,22 @@ export default memo(function SettleSinger() {
     <SetterSongerWrapper>
       <ThemeHeaderSmall title="入驻歌手" more="查看全部>" />
       <div className="singer-list">
-        {settleSings.map((item) => {
-          return (
-            <NavLink
-              to={`/user/home?id=${item.id}`}
-              key={item.id}
-              className="item"
-            >
-              <img src={getSizeImage(item.picUrl, 62)} alt="" />
-              <div className="info">
-                <div className="title">{item.name}</div>
-                <div className="name">{item.name}</div>
-              </div>
-            </NavLink>
-          );
-        })}
+        {settleSings &&
+          settleSings.map((item) => {
+            return (
+              <NavLink
+                to={`/user/home?id=${item.id}`}
+                key={item.id}
+                className="item"
+              >
+                <img src={getSizeImage(item.picUrl, 62)} alt="" />
+                <div className="info">
+                  <div className="title">{item.name}</div>
+                  <div className="name">{item.name}</div>
+                </div>
+              </NavLink>
+            );
+          })}
       </div>
       <div className="apply-for">
         <a
