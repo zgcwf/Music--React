@@ -53,7 +53,7 @@ export default memo(function AppPlayBar() {
   // handle function
   // audio时间发生变动调用该方法
   const timeUpdate = (e) => {
-    //e.target为audio,e.target.currentTime为当前的时间(秒)
+    //e.target为audio,e.target.currentTime为当前播放的时间(秒)
     const currentTimes = e.target.currentTime;
     // 如果其自然播放而没有滑动,则执行内部的方法
     if (!changing) {
@@ -96,6 +96,7 @@ export default memo(function AppPlayBar() {
     setChanging(false)
 
     const currentTimes = value / 100 * duration / 1000
+    // 将audio当前播放时间设置为currentTimes
     audioRef.current.currentTime = currentTimes
     setCurrentTime(currentTimes * 1000)
 

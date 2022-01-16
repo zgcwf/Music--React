@@ -11,6 +11,7 @@ import Album from "@/pages/Discover/c-pages/Album";
 
 import Friends from "@/pages/Friends";
 import Mine from "@/pages/Mine";
+import NotFound from "@/components/NotFound";
 const routes = [
   {
     path: "/",
@@ -52,6 +53,11 @@ const routes = [
         path: "/discover/album",
         component: Album,
       },
+      {
+        path: "*",
+        exact: true,
+        component: NotFound,
+      },
     ],
   },
   {
@@ -61,6 +67,11 @@ const routes = [
   {
     path: "/mine",
     component: Mine,
+  },
+  {
+    path: "*",
+    exact: true,
+    component: NotFound,
   },
 ];
 export default routes;
