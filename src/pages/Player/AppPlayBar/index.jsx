@@ -4,7 +4,10 @@ import { NavLink } from "react-router-dom";
 import { shallowEqual, useSelector, useDispatch } from "react-redux";
 
 import { PlaybarWrapper, Control, PlayInfo, Operator } from "./style";
-import { getSongDetailAction } from "../store/actionCreators.js";
+import {
+  getSongDetailAction,
+  changeSequenceAction,
+} from "../store/actionCreators.js";
 import {
   getSizeImage,
   formatMinuteSecond,
@@ -21,9 +24,10 @@ export default memo(function AppPlayBar() {
 
   // redux hooks
   const dispatch = useDispatch();
-  const { currentSong } = useSelector(
+  const { currentSong, sequence } = useSelector(
     (state) => ({
       currentSong: state.getIn(["player", "currentSong"]),
+      sequence: state.getIn(["player", "sequence"]),
     }),
     shallowEqual
   );
@@ -51,6 +55,7 @@ export default memo(function AppPlayBar() {
   const showDuration = formatMinuteSecond(duration); //总时间
   const showCurrentTime = formatMinuteSecond(currentTime); //当前时间
   // handle function
+
   // audio时间发生变动调用该方法
   const timeUpdate = (e) => {
     //e.target为audio,e.target.currentTime为当前播放的时间(秒)
@@ -108,6 +113,14 @@ export default memo(function AppPlayBar() {
     },
     [duration, isPlaying, playMusic]
   );
+  // 改变播放顺序
+  const changeSequence = () => {
+    let Sequence = sequence + 1;
+    if (Sequence > 2) {
+      Sequence = 0;
+    }
+    dispatch(changeSequenceAction(Sequence));
+  };
   return (
     <PlaybarWrapper className="sprite_player">
       <div className="content wrap-v2">
@@ -149,14 +162,17 @@ export default memo(function AppPlayBar() {
             </div>
           </div>
         </PlayInfo>
-        <Operator>
+        <Operator sequence={sequence}>
           <div className="left">
             <button className="sprite_player btn favor"></button>
             <button className="sprite_player btn share"></button>
           </div>
           <div className="right sprite_player">
             <button className="sprite_player btn volume"></button>
-            <button className="sprite_player btn loop"></button>
+            <button
+              className="sprite_player btn loop"
+              onClick={changeSequence}
+            ></button>
             <button className="sprite_player btn playlist">3</button>
           </div>
         </Operator>

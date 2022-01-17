@@ -17,6 +17,12 @@ const changeCurrentSongIndexAction = (index) => ({
   index,
 });
 
+// 改变当前播放歌曲在播放列表的播放顺序(// 0 循环 1 随机 2 单曲)
+export const changeSequenceAction = (sequence) => ({
+  type: actionTypes.CHANGE_SEQUENCE,
+  sequence,
+});
+
 // 异步请求当前播放的歌曲
 export const getSongDetailAction = (ids) => {
   return async (dispatch, getState) => {

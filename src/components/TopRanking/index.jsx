@@ -14,6 +14,7 @@ export default memo(function TopRanking(props) {
   const dispatch = useDispatch();
 
   // other handle
+  // 点击在下方播放音乐
   const playMusic = (item) => {
     dispatch(getSongDetailAction(item.id));
   };
