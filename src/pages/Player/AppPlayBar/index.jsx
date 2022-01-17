@@ -9,15 +9,15 @@ import {
   getSizeImage,
   formatMinuteSecond,
   getPlaySong,
-  numberDiff
+  numberDiff,
 } from "@/utils/Rec-format";
 
 export default memo(function AppPlayBar() {
   // state and props
   const [currentTime, setCurrentTime] = useState(0);
   const [progress, setProgress] = useState(0);
-  const [changing, setChanging] = useState(false)
-  const [isPlaying, setIsPlaying] = useState(false)
+  const [changing, setChanging] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
 
   // redux hooks
   const dispatch = useDispatch();
@@ -35,14 +35,14 @@ export default memo(function AppPlayBar() {
   }, [dispatch]);
   // 为audio添加上播放音乐的路径
   useEffect(() => {
-    audioRef.current.src = getPlaySong(currentSong.id);
-  }, [currentSong])
+    audioRef.current.src = getPlaySong(currentSong && currentSong.id);
+  }, [currentSong]);
 
   // other handle
   // 保证数据不为undefined
   const picUrl = (currentSong && currentSong.al && currentSong.al.picUrl) || "";
   const songName = (currentSong && currentSong.name) || "未知歌曲";
-  const songId = (currentSong && currentSong.id);
+  const songId = currentSong && currentSong.id;
   const singerId = currentSong && currentSong.ar && currentSong.ar[0].id;
   const singerName =
     (currentSong && currentSong.ar && currentSong.ar[0].name) || "未知歌手";
@@ -64,46 +64,50 @@ export default memo(function AppPlayBar() {
     }
     // 判断当前播放时间与总时间差的值是否小于999毫秒
     if (numberDiff(currentTimes * 1000, duration)) {
-      setIsPlaying(false)
-      setProgress(0)
+      setIsPlaying(false);
+      setProgress(0);
     }
   };
 
   // 点击播放、暂停音乐按钮，并调用play/pause方法进行播放/暂停
-  const playMusic = useCallback(
-    () => {
-      isPlaying ? audioRef.current.pause() : audioRef.current.play()
-      setIsPlaying(!isPlaying)
-    }, [isPlaying]
-  )
+  const playMusic = useCallback(() => {
+    isPlaying ? audioRef.current.pause() : audioRef.current.play();
+    setIsPlaying(!isPlaying);
+  }, [isPlaying]);
 
   // 鼠标划入提示播放进度
   const formatter = (value) => {
     return `${value}%`;
-  }
+  };
 
   // 在鼠标在滑动条来回滑动时调用
-  const sliderChange = useCallback((value) => {
-    setChanging(true)
+  const sliderChange = useCallback(
+    (value) => {
+      setChanging(true);
 
-    const currentTimes = value / 100 * duration;
-    setCurrentTime(currentTimes);
-    setProgress(value)
-  }, [duration])
+      const currentTimes = (value / 100) * duration;
+      setCurrentTime(currentTimes);
+      setProgress(value);
+    },
+    [duration]
+  );
 
   // 在鼠标在滚动条中弹起时调用
-  const sliderAfterChange = useCallback((value) => {
-    setChanging(false)
+  const sliderAfterChange = useCallback(
+    (value) => {
+      setChanging(false);
 
-    const currentTimes = value / 100 * duration / 1000
-    // 将audio当前播放时间设置为currentTimes
-    audioRef.current.currentTime = currentTimes
-    setCurrentTime(currentTimes * 1000)
+      const currentTimes = ((value / 100) * duration) / 1000;
+      // 将audio当前播放时间设置为currentTimes
+      audioRef.current.currentTime = currentTimes;
+      setCurrentTime(currentTimes * 1000);
 
-    if (!isPlaying) {
-      playMusic();
-    }
-  }, [duration, isPlaying, playMusic])
+      if (!isPlaying) {
+        playMusic();
+      }
+    },
+    [duration, isPlaying, playMusic]
+  );
   return (
     <PlaybarWrapper className="sprite_player">
       <div className="content wrap-v2">
@@ -123,10 +127,7 @@ export default memo(function AppPlayBar() {
           </div>
           <div className="info">
             <div className="song">
-              <NavLink
-                to={`/song?id=${songId}`}
-                className="song-name"
-              >
+              <NavLink to={`/song?id=${songId}`} className="song-name">
                 {songName}
               </NavLink>
               <NavLink to={`/artist?id=${singerId}`} className="singer-name">
