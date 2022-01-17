@@ -12,6 +12,8 @@ import Album from "@/pages/Discover/c-pages/Album";
 import Friends from "@/pages/Friends";
 import Mine from "@/pages/Mine";
 import NotFound from "@/components/NotFound";
+import Song from "@/pages/Player";
+
 const routes = [
   {
     path: "/",
@@ -67,6 +69,10 @@ const routes = [
   {
     path: "/mine",
     component: Mine,
+  },
+  {
+    path: "/song",
+    component: Song,
   },
   {
     path: "*",

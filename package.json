@@ -23,6 +23,7 @@
     "redux-thunk": "^2.4.1",
     "style-components": "^0.1.0",
     "styled-components": "^5.3.3",
+    "url-parse": "^1.5.4",
     "web-vitals": "^2.1.2"
   },
   "scripts": {
