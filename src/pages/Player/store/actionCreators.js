@@ -1,4 +1,5 @@
 import { getSongDetail, getLyric } from "@/service/player";
+import { getRandomNumber } from "@/utils/Rec-format";
 import * as actionTypes from "./constants";
 
 // 改变当前播放列表的播放歌曲
@@ -46,5 +47,37 @@ export const getSongDetailAction = (ids) => {
       dispatch(changeCurrentSongIndexAction(newPlayList.length - 1));
       dispatch(changeCurrentSongAction(song));
     }
+  };
+};
+// 点击左右按钮，切换(<- ->)播放歌曲
+export const changeCurrentIndexAndSongAction = (tag) => {
+  return (dispatch, getState) => {
+    const playList = getState().getIn(["player", "playList"]);
+    const sequence = getState().getIn(["player", "sequence"]);
+    let currentSongIndex = getState().getIn(["player", "currentSongIndex"]);
+    // 得到新索引
+    switch (sequence) {
+      case 1: //随机播放
+        // 随机播放时，得到一个随机索引值
+        let randomIndex = getRandomNumber(playList.length);
+        // 如果得到的索引值等于当前索引，重新得到一个新的索引
+        while (randomIndex === currentSongIndex) {
+          randomIndex = getRandomNumber(playList.length);
+        }
+        currentSongIndex = randomIndex;
+        break;
+      default:
+        //其他情况，即单曲或者循环播放时（这两种情况点击左右切换按钮都会切换歌曲）
+        currentSongIndex = currentSongIndex + tag;
+        if (currentSongIndex >= playList.length) {
+          currentSongIndex = 0;
+        }
+        if (currentSongIndex < 0) {
+          currentSongIndex = playList.length - 1;
+        }
+    }
+    const currentSong = playList[currentSongIndex];
+    dispatch(changeCurrentSongAction(currentSong));
+    dispatch(changeCurrentSongIndexAction(currentSongIndex));
   };
 };

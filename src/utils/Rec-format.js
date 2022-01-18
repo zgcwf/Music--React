@@ -54,11 +54,17 @@ export function formatMonthDay(time) {
 export function formatMinuteSecond(time) {
   return formatDate(time, "mm:ss");
 }
+
 // 音乐播放器，传入对应id即可进行播放
 export function getPlaySong(id) {
   return `https://music.163.com/song/media/outer/url?id=${id}.mp3`;
 }
+
 // 判断两个数之间的差值是否小于999
 export function numberDiff(arg1, arg2) {
-  return Math.abs(arg1 - arg2) < 999
+  return Math.abs(arg1 - arg2) < 999;
+}
+// 随机向下取整
+export function getRandomNumber(num) {
+  return Math.floor(Math.random() * num);
 }

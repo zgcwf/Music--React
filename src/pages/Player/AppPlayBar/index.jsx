@@ -7,12 +7,12 @@ import { PlaybarWrapper, Control, PlayInfo, Operator } from "./style";
 import {
   getSongDetailAction,
   changeSequenceAction,
+  changeCurrentIndexAndSongAction,
 } from "../store/actionCreators.js";
 import {
   getSizeImage,
   formatMinuteSecond,
   getPlaySong,
-  numberDiff,
 } from "@/utils/Rec-format";
 
 export default memo(function AppPlayBar() {
@@ -35,11 +35,20 @@ export default memo(function AppPlayBar() {
   // other hooks
   const audioRef = useRef();
   useEffect(() => {
-    dispatch(getSongDetailAction(28844143));
+    dispatch(getSongDetailAction(26089233));
+    // 28844143 26089233 28828593
   }, [dispatch]);
-  // 为audio添加上播放音乐的路径
+  // 为audio添加上播放音乐的路径，并且音乐切换时自动播放
   useEffect(() => {
     audioRef.current.src = getPlaySong(currentSong && currentSong.id);
+    audioRef.current
+      .play()
+      .then((res) => {
+        setIsPlaying(true);
+      })
+      .catch((err) => {
+        setIsPlaying(false);
+      });
   }, [currentSong]);
 
   // other handle
@@ -66,11 +75,6 @@ export default memo(function AppPlayBar() {
       setCurrentTime(currentTimes * 1000);
       // 获取currentTimes/总时间 所占的比例（0.xx）*100，即xx%，存入state
       setProgress(((currentTimes * 1000) / duration) * 100);
-    }
-    // 判断当前播放时间与总时间差的值是否小于999毫秒
-    if (numberDiff(currentTimes * 1000, duration)) {
-      setIsPlaying(false);
-      setProgress(0);
     }
   };
 
@@ -101,7 +105,6 @@ export default memo(function AppPlayBar() {
   const sliderAfterChange = useCallback(
     (value) => {
       setChanging(false);
-
       const currentTimes = ((value / 100) * duration) / 1000;
       // 将audio当前播放时间设置为currentTimes
       audioRef.current.currentTime = currentTimes;
@@ -121,16 +124,37 @@ export default memo(function AppPlayBar() {
     }
     dispatch(changeSequenceAction(Sequence));
   };
+  // 点击左右按钮切换音乐
+  const changeMusic = (tag) => {
+    dispatch(changeCurrentIndexAndSongAction(tag));
+  };
+  // 一首音乐结束时调用该方法
+  const handleMusicEnded = () => {
+    if (sequence === 2) {
+      // 单曲循环,重复播放
+      audioRef.current.currentTime = 0;
+      audioRef.current.play();
+    } else {
+      // 否则调用方法下一首歌曲或者随机
+      dispatch(changeCurrentIndexAndSongAction(1));
+    }
+  };
   return (
     <PlaybarWrapper className="sprite_player">
       <div className="content wrap-v2">
         <Control isPlaying={isPlaying}>
-          <button className="prev sprite_player"></button>
+          <button
+            className="prev sprite_player"
+            onClick={(e) => changeMusic(-1)}
+          ></button>
           <button
             className="play sprite_player"
             onClick={(e) => playMusic()}
           ></button>
-          <button className="next sprite_player"></button>
+          <button
+            className="next sprite_player"
+            onClick={(e) => changeMusic(1)}
+          ></button>
         </Control>
         <PlayInfo>
           <div className="image">
@@ -177,8 +201,12 @@ export default memo(function AppPlayBar() {
           </div>
         </Operator>
       </div>
-      {/* onTimeUpdate,audio时间发生变动调用该方法 */}
-      <audio ref={audioRef} onTimeUpdate={(e) => timeUpdate(e)} />
+      {/* onTimeUpdate,audio时间发生变动调用该方法，onEnded audio时间结束时调用该方法 */}
+      <audio
+        ref={audioRef}
+        onTimeUpdate={(e) => timeUpdate(e)}
+        onEnded={(e) => handleMusicEnded()}
+      />
     </PlaybarWrapper>
   );
 });
