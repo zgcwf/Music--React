@@ -40,7 +40,6 @@ export const NotFountWrapper = styled.div`
   }
 
   .title-404 {
-    float: left;
     line-height: 80px;
     margin-left: 20px;
     display: inline-block;

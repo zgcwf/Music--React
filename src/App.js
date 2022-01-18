@@ -11,15 +11,13 @@ import store from "./store/index";
 import AppFooter from "@/components/AppFooter";
 import AppHeader from "@/components/AppHeader";
 import AppPlayBar from "./pages/Player/AppPlayBar";
-
+import Loading from "./components/Loading";
 export default memo(function App() {
   return (
     <div>
       <Provider store={store}>
         <AppHeader />
-        <Suspense fallback={<div>...loading</div>}>
-          {renderRoutes(routes)}
-        </Suspense>
+        <Suspense fallback={<Loading />}>{renderRoutes(routes)}</Suspense>
         <AppFooter />
         <AppPlayBar />
       </Provider>
