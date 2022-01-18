@@ -1,5 +1,5 @@
 import React, { memo, useCallback, useEffect, useRef, useState } from "react";
-import { Slider } from "antd";
+import { Slider, message } from "antd";
 import { NavLink } from "react-router-dom";
 import { shallowEqual, useSelector, useDispatch } from "react-redux";
 
@@ -8,6 +8,7 @@ import {
   getSongDetailAction,
   changeSequenceAction,
   changeCurrentIndexAndSongAction,
+  changeCurrentLyricIndexAction,
 } from "../store/actionCreators.js";
 import {
   getSizeImage,
@@ -24,14 +25,17 @@ export default memo(function AppPlayBar() {
 
   // redux hooks
   const dispatch = useDispatch();
-  const { currentSong, sequence, playList } = useSelector(
-    (state) => ({
-      currentSong: state.getIn(["player", "currentSong"]),
-      sequence: state.getIn(["player", "sequence"]),
-      playList: state.getIn(["player", "playList"]),
-    }),
-    shallowEqual
-  );
+  const { currentSong, sequence, playList, lyricList, currentLyricIndex } =
+    useSelector(
+      (state) => ({
+        currentSong: state.getIn(["player", "currentSong"]),
+        sequence: state.getIn(["player", "sequence"]),
+        playList: state.getIn(["player", "playList"]),
+        lyricList: state.getIn(["player", "lyricList"]),
+        currentLyricIndex: state.getIn(["player", "currentLyricIndex"]),
+      }),
+      shallowEqual
+    );
 
   // other hooks
   const audioRef = useRef();
@@ -39,6 +43,7 @@ export default memo(function AppPlayBar() {
     dispatch(getSongDetailAction(26089233));
     // 28844143 26089233 28828593
   }, [dispatch]);
+
   // 为audio添加上播放音乐的路径，并且音乐切换时自动播放
   useEffect(() => {
     audioRef.current.src = getPlaySong(currentSong && currentSong.id);
@@ -76,6 +81,27 @@ export default memo(function AppPlayBar() {
       setCurrentTime(currentTimes * 1000);
       // 获取currentTimes/总时间 所占的比例（0.xx）*100，即xx%，存入state
       setProgress(((currentTimes * 1000) / duration) * 100);
+    }
+
+    // 获取当前播放的歌词
+    let i = 0;
+    // 遍历，如果当前播放的时间小于当前项歌词的时间，break跳出循环，
+    // 当前记录的i减去1即为当前播放的歌词
+    for (i; i < lyricList.length; i++) {
+      let lyricItem = lyricList[i];
+      if (currentTime < lyricItem.time) {
+        break;
+      }
+    }
+    if (currentLyricIndex !== i - 1) {
+      dispatch(changeCurrentLyricIndexAction(i - 1));
+      const content = lyricList[i - 1]?.content;
+      message.open({
+        key: "lyric",
+        content: content,
+        duration: 0,
+        className: "lyric-class",
+      });
     }
   };
 

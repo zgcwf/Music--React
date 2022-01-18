@@ -105,3 +105,8 @@ export const getLyricAction = (id) => {
     });
   };
 };
+// 当前歌词的索引
+export const changeCurrentLyricIndexAction = (index) => ({
+  type: actionTypes.CHANGE_CURRENT_LYRIC_INDEX,
+  index,
+});
