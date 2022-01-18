@@ -77,7 +77,7 @@ https://juejin.cn/post/7049924094652842020/
 clone 项目：
 
 ```
-git clone https://github.com/coderwhy/hy-react-web-music.git
+git clone xxxx
 ```
 
 安装项目依赖：
