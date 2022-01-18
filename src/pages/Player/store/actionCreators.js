@@ -1,5 +1,5 @@
 import { getSongDetail, getLyric } from "@/service/player";
-import { getRandomNumber } from "@/utils/Rec-format";
+import { getRandomNumber, parseLyric } from "@/utils/Rec-format";
 import * as actionTypes from "./constants";
 
 // 改变当前播放列表的播放歌曲
@@ -31,14 +31,18 @@ export const getSongDetailAction = (ids) => {
     const playList = getState().getIn(["player", "playList"]) || [];
     const songIndex = playList && playList.findIndex((song) => song.id === ids);
     // 2.判断是否找到歌曲
+    let song = null;
     if (songIndex !== -1) {
       // 查找到歌曲
       dispatch(changeCurrentSongIndexAction(songIndex));
-      dispatch(changeCurrentSongAction(playList && playList[songIndex]));
+      song = playList && playList[songIndex];
+      dispatch(changeCurrentSongAction(song));
+      dispatch(getLyricAction(song.id));
     } else {
       // 没有找到歌曲--请求歌曲数据
       const res = await getSongDetail(ids);
-      const song = res.songs && res.songs[0];
+      song = res.songs && res.songs[0];
+      if (!song) return;
 
       // 1.将最新请求到的歌曲添加到播放列表中
       const newPlayList = [...playList, song];
@@ -46,6 +50,8 @@ export const getSongDetailAction = (ids) => {
       dispatch(changePlayListAction(newPlayList));
       dispatch(changeCurrentSongIndexAction(newPlayList.length - 1));
       dispatch(changeCurrentSongAction(song));
+      // 3.请求歌词
+      dispatch(getLyricAction(song.id));
     }
   };
 };
@@ -79,5 +85,23 @@ export const changeCurrentIndexAndSongAction = (tag) => {
     const currentSong = playList[currentSongIndex];
     dispatch(changeCurrentSongAction(currentSong));
     dispatch(changeCurrentSongIndexAction(currentSongIndex));
+    // 请求歌词
+    dispatch(getLyricAction(currentSong.id));
+  };
+};
+
+// 改变当前的歌词
+const changLyricListAction = (lyricList) => ({
+  type: actionTypes.CHANGE_LYRIC_LIST,
+  lyricList,
+});
+// 获取歌曲的歌词
+export const getLyricAction = (id) => {
+  return (dispatch) => {
+    getLyric(id).then((res) => {
+      const lyric = res.lrc.lyric;
+      const lyricList = parseLyric(lyric);
+      dispatch(changLyricListAction(lyricList));
+    });
   };
 };

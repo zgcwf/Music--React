@@ -44,10 +44,10 @@ export default memo(function AppPlayBar() {
     audioRef.current.src = getPlaySong(currentSong && currentSong.id);
     audioRef.current
       .play()
-      .then((res) => {
+      .then(() => {
         setIsPlaying(true);
       })
-      .catch((err) => {
+      .catch(() => {
         setIsPlaying(false);
       });
   }, [currentSong]);

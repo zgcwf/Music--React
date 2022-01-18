@@ -10,7 +10,7 @@ export function getSongDetail(ids) {
     },
   });
 }
-
+// 获取歌曲的歌词
 export function getLyric(id) {
   return request({
     url: "/lyric",

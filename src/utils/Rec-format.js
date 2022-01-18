@@ -1,4 +1,4 @@
-// 进行播放数字格式转换
+// 进行播放总数字格式转换
 export function getCount(count) {
   if (count < 0) return;
   if (count < 10000) {
@@ -9,6 +9,7 @@ export function getCount(count) {
     return Math.floor(count / 10000000) / 10 + "亿";
   }
 }
+
 // 给图片地址拼接上尺寸，从服务器获取合适尺寸图片，进行性能优化
 export function getSizeImage(imgUrl, size) {
   return `${imgUrl}?param=${size}y${size}`;
@@ -67,4 +68,32 @@ export function numberDiff(arg1, arg2) {
 // 随机向下取整
 export function getRandomNumber(num) {
   return Math.floor(Math.random() * num);
+}
+
+// 进行歌词格式转化
+// line: [00:31.160]如果场景里出现一架钢琴 ==>{time: 16280, content: 'あんなに愛した君がいない'}
+// 用正则表达式匹配前面的时间[00:31.160]
+const parseExp = /\[(\d{2}):(\d{2})\.(\d{2,3})\]/;
+
+export function parseLyric(lyricString) {
+  const lineStrings = lyricString.split("\n");
+
+  const lyrics = [];
+  for (let line of lineStrings) {
+    if (line) {
+      const result = parseExp.exec(line);
+      // console.log(result);
+      // 如果这一次没有匹配到，则跳过这一次进行下一次匹配
+      if (!result) continue;
+      const time1 = result[1] * 60 * 1000;
+      const time2 = result[2] * 1000;
+      const time3 = result[3].length === 3 ? result[3] * 1 : result[3] * 10;
+      const time = time1 + time2 + time3;
+      // replace方法：用后面的值取代前面的值，trim：去掉空格
+      const content = line.replace(parseExp, "").trim();
+      const lineObj = { time: time, content: content };
+      lyrics.push(lineObj);
+    }
+  }
+  return lyrics;
 }
