@@ -1,5 +1,5 @@
 // 导入的第三方库
-import React, { memo } from "react";
+import React, { memo, Suspense } from "react";
 import { renderRoutes } from "react-router-config";
 import { Provider } from "react-redux";
 
@@ -17,7 +17,9 @@ export default memo(function App() {
     <div>
       <Provider store={store}>
         <AppHeader />
-        {renderRoutes(routes)}
+        <Suspense fallback={<div>...loading</div>}>
+          {renderRoutes(routes)}
+        </Suspense>
         <AppFooter />
         <AppPlayBar />
       </Provider>

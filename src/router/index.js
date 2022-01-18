@@ -1,18 +1,34 @@
+import React from "react";
+
 import { Redirect } from "react-router-dom";
 
-import Discover from "@/pages/Discover";
+const Discover = React.lazy(() => import("@/pages/Discover"));
+const Recommend = React.lazy((_) =>
+  import("@/pages/Discover/c-pages/Recommend")
+);
+const Ranking = React.lazy((_) => import("@/pages/Discover/c-pages/Ranking"));
+const Songs = React.lazy((_) => import("@/pages/Discover/c-pages/Songs"));
+const Djradio = React.lazy((_) => import("@/pages/Discover/c-pages/Djradio"));
+const Artist = React.lazy((_) => import("@/pages/Discover/c-pages/Artist"));
+const Album = React.lazy((_) => import("@/pages/Discover/c-pages/Album"));
 
-import Recommend from "@/pages/Discover/c-pages/Recommend";
-import Ranking from "@/pages/Discover/c-pages/Ranking";
-import Songs from "@/pages/Discover/c-pages/Songs";
-import Djradio from "@/pages/Discover/c-pages/Djradio";
-import Artist from "@/pages/Discover/c-pages/Artist";
-import Album from "@/pages/Discover/c-pages/Album";
+const Friends = React.lazy((_) => import("@/pages/Friends"));
+const Mine = React.lazy((_) => import("@/pages/Mine"));
+const NotFound = React.lazy((_) => import("@/components/NotFound"));
+const Song = React.lazy((_) => import("@/pages/Player"));
+// import Discover from "@/pages/Discover";
 
-import Friends from "@/pages/Friends";
-import Mine from "@/pages/Mine";
-import NotFound from "@/components/NotFound";
-import Song from "@/pages/Player";
+// import Recommend from "@/pages/Discover/c-pages/Recommend";
+// import Ranking from "@/pages/Discover/c-pages/Ranking";
+// import Songs from "@/pages/Discover/c-pages/Songs";
+// import Djradio from "@/pages/Discover/c-pages/Djradio";
+// import Artist from "@/pages/Discover/c-pages/Artist";
+// import Album from "@/pages/Discover/c-pages/Album";
+
+// import Friends from "@/pages/Friends";
+// import Mine from "@/pages/Mine";
+// import NotFound from "@/components/NotFound";
+// import Song from "@/pages/Player";
 
 const routes = [
   {
