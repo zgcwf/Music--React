@@ -24,10 +24,11 @@ export default memo(function AppPlayBar() {
 
   // redux hooks
   const dispatch = useDispatch();
-  const { currentSong, sequence } = useSelector(
+  const { currentSong, sequence, playList } = useSelector(
     (state) => ({
       currentSong: state.getIn(["player", "currentSong"]),
       sequence: state.getIn(["player", "sequence"]),
+      playList: state.getIn(["player", "playList"]),
     }),
     shallowEqual
   );
@@ -197,7 +198,9 @@ export default memo(function AppPlayBar() {
               className="sprite_player btn loop"
               onClick={changeSequence}
             ></button>
-            <button className="sprite_player btn playlist">3</button>
+            <button className="sprite_player btn playlist">
+              {playList.length}
+            </button>
           </div>
         </Operator>
       </div>
