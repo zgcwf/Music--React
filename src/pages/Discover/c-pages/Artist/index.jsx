@@ -1,9 +1,10 @@
 import React, { memo } from "react";
+import UnDone from "@/components/UnDone";
 
 export default memo(function Artist() {
   return (
     <div>
-      <h2>HYArtist</h2>
+      <UnDone />
     </div>
   );
 });

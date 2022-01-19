@@ -1,9 +1,6 @@
 import React, { memo } from "react";
+import UnDone from "@/components/UnDone";
 
 export default memo(function Ranking() {
-  return (
-    <div>
-      <h2>HYRanking</h2>
-    </div>
-  );
+  return <UnDone />;
 });

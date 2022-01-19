@@ -1,9 +1,10 @@
-import React, { memo } from 'react'
+import React, { memo } from "react";
+import UnDone from "@/components/UnDone";
 
 export default memo(function Friends() {
-    return (
-        <div>
-            Friends
-        </div>
-    )
-})
+  return (
+    <div>
+      <UnDone />
+    </div>
+  );
+});
