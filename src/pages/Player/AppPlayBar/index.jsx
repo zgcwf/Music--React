@@ -16,12 +16,15 @@ import {
   getPlaySong,
 } from "@/utils/Rec-format";
 
+import AppPlayPanel from "../AppPlayPanel";
+
 export default memo(function AppPlayBar() {
   // state and props
-  const [currentTime, setCurrentTime] = useState(0);
-  const [progress, setProgress] = useState(0);
-  const [changing, setChanging] = useState(false);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [currentTime, setCurrentTime] = useState(0); // 用于保存当前播放的时间
+  const [progress, setProgress] = useState(0); // 滑块进度
+  const [changing, setChanging] = useState(false); // 是否正在滑动
+  const [isPlaying, setIsPlaying] = useState(false); // 是否正在播放
+  const [showPanel, setShowPanel] = useState(false); // 是否显示播放列表
 
   // redux hooks
   const dispatch = useDispatch();
@@ -40,8 +43,7 @@ export default memo(function AppPlayBar() {
   // other hooks
   const audioRef = useRef();
   useEffect(() => {
-    dispatch(getSongDetailAction(26089233));
-    // 28844143 26089233 28828593
+    dispatch(getSongDetailAction(28844143));
   }, [dispatch]);
 
   // 为audio添加上播放音乐的路径，并且音乐切换时自动播放
@@ -224,7 +226,10 @@ export default memo(function AppPlayBar() {
               className="sprite_player btn loop"
               onClick={changeSequence}
             ></button>
-            <button className="sprite_player btn playlist">
+            <button
+              className="sprite_player btn playlist"
+              onClick={(e) => setShowPanel(!showPanel)}
+            >
               {playList.length}
             </button>
           </div>
@@ -236,6 +241,7 @@ export default memo(function AppPlayBar() {
         onTimeUpdate={(e) => timeUpdate(e)}
         onEnded={(e) => handleMusicEnded()}
       />
+      {showPanel && <AppPlayPanel />}
     </PlaybarWrapper>
   );
 });

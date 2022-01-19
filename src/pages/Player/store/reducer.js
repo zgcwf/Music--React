@@ -7,7 +7,7 @@ const defaultState = Map({
   currentSongIndex: 0, //当前歌曲索引
   currentSong: {}, //当前歌曲
   sequence: 0, // 0 循环 1 随机 2 单曲
-  lyricList: [], //当前歌词
+  lyricList: [], //歌词
   currentLyricIndex: 0, //当前歌词的索引
 });
 

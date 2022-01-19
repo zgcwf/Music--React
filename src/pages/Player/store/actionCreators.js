@@ -24,6 +24,29 @@ export const changeSequenceAction = (sequence) => ({
   sequence,
 });
 
+// 改变当前的歌词
+const changLyricListAction = (lyricList) => ({
+  type: actionTypes.CHANGE_LYRIC_LIST,
+  lyricList,
+});
+
+// 获取歌曲的歌词
+export const getLyricAction = (id) => {
+  return (dispatch) => {
+    getLyric(id).then((res) => {
+      const lyric = res.lrc.lyric;
+      const lyricList = parseLyric(lyric);
+      dispatch(changLyricListAction(lyricList));
+    });
+  };
+};
+
+// 当前歌词的索引
+export const changeCurrentLyricIndexAction = (index) => ({
+  type: actionTypes.CHANGE_CURRENT_LYRIC_INDEX,
+  index,
+});
+
 // 异步请求当前播放的歌曲
 export const getSongDetailAction = (ids) => {
   return async (dispatch, getState) => {
@@ -55,6 +78,7 @@ export const getSongDetailAction = (ids) => {
     }
   };
 };
+
 // 点击左右按钮，切换(<- ->)播放歌曲
 export const changeCurrentIndexAndSongAction = (tag) => {
   return (dispatch, getState) => {
@@ -89,24 +113,3 @@ export const changeCurrentIndexAndSongAction = (tag) => {
     dispatch(getLyricAction(currentSong.id));
   };
 };
-
-// 改变当前的歌词
-const changLyricListAction = (lyricList) => ({
-  type: actionTypes.CHANGE_LYRIC_LIST,
-  lyricList,
-});
-// 获取歌曲的歌词
-export const getLyricAction = (id) => {
-  return (dispatch) => {
-    getLyric(id).then((res) => {
-      const lyric = res.lrc.lyric;
-      const lyricList = parseLyric(lyric);
-      dispatch(changLyricListAction(lyricList));
-    });
-  };
-};
-// 当前歌词的索引
-export const changeCurrentLyricIndexAction = (index) => ({
-  type: actionTypes.CHANGE_CURRENT_LYRIC_INDEX,
-  index,
-});
