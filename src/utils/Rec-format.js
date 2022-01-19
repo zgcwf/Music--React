@@ -101,11 +101,13 @@ export function parseLyric(lyricString) {
 // 实现歌词的滚动
 export function scrollTo(element, to, duration) {
   if (duration <= 0) return;
-  var difference = to - element.scrollTop;
-  var perTick = (difference / duration) * 10;
+  var difference = to - element.scrollTop; // 滚动条需要移动的总距离
+  var perTick = (difference / duration) * 10; // 每次移动的距离
   setTimeout(function () {
+    // 每次地柜调用时用当前的滚动高度加上每次移动的距离
     element.scrollTop = element.scrollTop + perTick;
-    if (element.scrollTop === to) return;
-    scrollTo(element, to, duration - 10);
+    if (element.scrollTop === to) return; // 如果完成要求的移动 则停止调用
+    scrollTo(element, to, duration - 10); // 递归调用 直到完成规定的移动
   }, 10);
+  console.log(to, element.scrollTop, difference, perTick, duration);
 }

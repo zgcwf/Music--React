@@ -18,7 +18,7 @@ export default memo(function LyricPanel() {
   // other hooks
   const panelRef = useRef();
   useEffect(() => {
-    // console.log(currentLyricIndex);
+    // console.log(panelRef.current);
     if (currentLyricIndex > 0 && currentLyricIndex < 3) return;
     scrollTo(panelRef.current, (currentLyricIndex - 3) * 32, 300);
   }, [currentLyricIndex]);
