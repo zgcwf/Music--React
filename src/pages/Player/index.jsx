@@ -1,24 +1,27 @@
 import React, { memo } from "react";
-import { qs } from "url-parse"; //要引入
+// import { qs } from "url-parse"; //要引入
 
 import { PlayerWrapper, PlayerLeft, PlayerRight } from "./style";
 
-export default memo(function HYPlayer(props) {
+import PlayerInfo from './c-cpns/PlayerInfo';
+import PlayerComment from './c-cpns/PlayerComment';
+import PlayerSongs from './c-cpns/PlayerSongs';
+import PlayerRelevant from './c-cpns/PlayerRelevant';
+export default memo(function Player(props) {
   // 接收search参数
-  const { search } = props.location;
-  const { id } = qs.parse(search);
-  console.log(id);
+  // const { search } = props.location;
+  // const { id } = qs.parse(search);
+  // const ids = parseInt(id)
   return (
     <PlayerWrapper>
       <div className="content wrap-v2">
         <PlayerLeft>
-          <h2>HYPlayerInfo</h2>
-          <h2>HYSongContent</h2>
+          <PlayerInfo />
+          <PlayerComment />
         </PlayerLeft>
         <PlayerRight>
-          <h2>HYSimiPlaylist</h2>
-          <h2>HYSimiSong</h2>
-          <h2>Download</h2>
+          <PlayerSongs />
+          <PlayerRelevant />
         </PlayerRight>
       </div>
     </PlayerWrapper>

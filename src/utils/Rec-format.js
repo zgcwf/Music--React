@@ -109,5 +109,5 @@ export function scrollTo(element, to, duration) {
     if (element.scrollTop === to) return; // 如果完成要求的移动 则停止调用
     scrollTo(element, to, duration - 10); // 递归调用 直到完成规定的移动
   }, 10);
-  console.log(to, element.scrollTop, difference, perTick, duration);
+  // console.log(to, element.scrollTop, difference, perTick, duration);
 }

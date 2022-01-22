@@ -9,6 +9,8 @@ const defaultState = Map({
   sequence: 0, // 0 循环 1 随机 2 单曲
   lyricList: [], //歌词
   currentLyricIndex: 0, //当前歌词的索引
+  simiPlaylist: [],//包含这首歌的歌单
+  simiSongs: [],//相似歌曲
 });
 
 function reducer(state = defaultState, action) {
@@ -25,6 +27,10 @@ function reducer(state = defaultState, action) {
       return state.set("lyricList", action.lyricList);
     case actionTypes.CHANGE_CURRENT_LYRIC_INDEX:
       return state.set("currentLyricIndex", action.index);
+    case actionTypes.CHANGE_SIMI_PLAYLIST:
+      return state.set("simiPlaylist", action.simiPlaylist);
+    case actionTypes.CHANGE_SIMI_SONGS:
+      return state.set("simiSongs", action.simiSongs);
     default:
       return state;
   }

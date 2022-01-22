@@ -7,3 +7,6 @@ export const CHANGE_SEQUENCE = "player/CHANGE_SEQUENCE";
 
 export const CHANGE_LYRIC_LIST = "player/CHANGE_LYRIC_LIST";
 export const CHANGE_CURRENT_LYRIC_INDEX = "player/CHANGE_CURRENT_LYRIC_INDEX";
+
+export const CHANGE_SIMI_PLAYLIST = "player/CHANGE_SIMI_PLAYLIST";
+export const CHANGE_SIMI_SONGS = "player/CHANGE_SIMI_SONGS";

@@ -19,3 +19,21 @@ export function getLyric(id) {
     },
   });
 }
+// 获取包含这首歌的歌单
+export function getSimiPlaylist(id) {
+  return request({
+    url: "/simi/playlist",
+    params: {
+      id
+    }
+  })
+}
+// 获取相似歌曲
+export function getSimiSong(id) {
+  return request({
+    url: "/simi/song",
+    params: {
+      id
+    }
+  })
+}

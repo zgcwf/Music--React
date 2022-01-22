@@ -1,10 +1,15 @@
-import React, { memo } from "react";
-import UnDone from "@/components/UnDone";
+import React, { memo } from 'react';
 
-export default memo(function Friends() {
+import { FriendWrapper } from './style';
+
+export default memo(function HYFriend() {
   return (
-    <div>
-      <UnDone />
-    </div>
-  );
-});
+    <FriendWrapper>
+      <div className="content wrap-v2">
+        <div className="pic">
+          <a className="login" href="/#">立即登录</a>
+        </div>
+      </div>
+    </FriendWrapper>
+  )
+})

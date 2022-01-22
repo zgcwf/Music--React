@@ -1,4 +1,4 @@
-import { getSongDetail, getLyric } from "@/service/player";
+import { getSongDetail, getLyric, getSimiPlaylist, getSimiSong } from "@/service/player";
 import { getRandomNumber, parseLyric } from "@/utils/Rec-format";
 import * as actionTypes from "./constants";
 
@@ -113,3 +113,36 @@ export const changeCurrentIndexAndSongAction = (tag) => {
     dispatch(getLyricAction(currentSong.id));
   };
 };
+
+
+const changeSimiPlaylistAction = (res) => ({
+  type: actionTypes.CHANGE_SIMI_PLAYLIST,
+  simiPlaylist: res.playlists
+})
+
+const changeSimiSongsAction = (res) => ({
+  type: actionTypes.CHANGE_SIMI_SONGS,
+  simiSongs: res.songs
+})
+// 获取包含这首歌的歌单
+export const getSimiPlaylistAction = () => {
+  return (dispatch, getState) => {
+    const id = getState().getIn(["player", "currentSong"]).id;
+    if (!id) return;
+
+    getSimiPlaylist(id).then(res => {
+      dispatch(changeSimiPlaylistAction(res));
+    })
+  }
+}
+// 获取相似歌曲
+export const getSimiSongAction = () => {
+  return (dispatch, getState) => {
+    const id = getState().getIn(["player", "currentSong"]).id;
+    if (!id) return;
+
+    getSimiSong(id).then(res => {
+      dispatch(changeSimiSongsAction(res));
+    })
+  }
+}

@@ -1,10 +1,15 @@
-import React, { memo } from "react";
-import UnDone from "@/components/UnDone";
+import React, { memo } from 'react';
 
-export default memo(function Mine() {
+import { MineWrapper } from './style';
+
+export default memo(function HYMine() {
   return (
-    <div>
-      <UnDone />
-    </div>
-  );
-});
+    <MineWrapper>
+      <div className="content wrap-v2">
+        <div className="pic">
+          <a className="login" href="/#">立即登录</a>
+        </div>
+      </div>
+    </MineWrapper>
+  )
+})

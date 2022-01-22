@@ -72,6 +72,10 @@ const routes = [
         component: Album,
       },
       {
+        path: "/discover/song",
+        component: Song,
+      },
+      {
         path: "*",
         exact: true,
         component: NotFound,
